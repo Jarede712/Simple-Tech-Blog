@@ -9,10 +9,4 @@ module.exports = {
     dialect: "mysql",
     port: process.env.DB_PORT || 3306,
   },
-  test: {
-    // Test environment configuration (if needed)
-  },
-  production: {
-    // Production environment configuration (if needed)
-  },
 };
