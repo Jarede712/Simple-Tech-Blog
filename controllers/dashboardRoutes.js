@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
-const withAuth = require("../utils/auth");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // GET route for the dashboard
-router.get("/", withAuth, async (req, res) => {
+router.get("/", isAuthenticated, async (req, res) => {
   try {
     // Fetch the posts of the logged-in user
     const userPostsData = await Post.findAll({
@@ -40,7 +40,7 @@ router.get("/", withAuth, async (req, res) => {
 });
 
 // POST route to create a new post
-router.post("/create", withAuth, async (req, res) => {
+router.post("/create", isAuthenticated, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -53,7 +53,7 @@ router.post("/create", withAuth, async (req, res) => {
 });
 
 // PUT route to update an existing post
-router.put("/update/:id", withAuth, async (req, res) => {
+router.put("/update/:id", isAuthenticated, async (req, res) => {
   try {
     const updatedPost = await Post.update(req.body, {
       where: {
@@ -73,7 +73,7 @@ router.put("/update/:id", withAuth, async (req, res) => {
 });
 
 // DELETE route to delete a post
-router.delete("/delete/:id", withAuth, async (req, res) => {
+router.delete("/delete/:id", isAuthenticated, async (req, res) => {
   try {
     const deletedPost = await Post.destroy({
       where: {

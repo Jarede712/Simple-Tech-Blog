@@ -5,7 +5,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const sequelize = require("./config/config");
 const routes = require("./controllers"); // Ensure you have your routes set up in the controllers directory
-const helpers = require("./utils/helpers"); // Optional: Include if you have handlebars helpers
+const helpers = require("./utils/auth"); // Optional: Include if you have handlebars helpers
 
 const app = express();
 const PORT = process.env.PORT || 3001;

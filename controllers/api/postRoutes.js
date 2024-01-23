@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { Post } = require("../../models");
-const withAuth = require("../../utils/auth");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 // POST route to create a new blog post
-router.post("/", withAuth, async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // PUT route to update a post
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/:id", isAuthenticated, async (req, res) => {
   try {
     const post = await Post.update(req.body, {
       where: {
@@ -53,7 +53,7 @@ router.put("/:id", withAuth, async (req, res) => {
 });
 
 // DELETE route to delete a post
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   try {
     const post = await Post.destroy({
       where: {
